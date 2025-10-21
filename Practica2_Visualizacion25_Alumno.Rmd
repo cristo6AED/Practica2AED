@@ -211,13 +211,23 @@ ggsave('figs/Ejercicio2.pdf')
 
 ```{r Solucion ejercicio 3}
 rm(list=ls())
-
+library(ggplot2)
 load("data/iris_tidy.Rdata")
 
 str(iris.tidy)
 
-iris.grafico1 <- 
-#ggsave('figs/Ejercicio3.pdf') # se almacena el último gráfico generado
+iris.grafico1 <- ggplot(data=iris.tidy, aes(x = Species, y = Value))
+iris.grafico1 + geom_point()
+
+iris.grafico2 <- ggplot(data=iris.tidy, aes(x = Species, y = Value, colour = Part))+geom_point()
+iris.grafico2
+iris.grafico2 + facet_grid(Measure~. )
+iris.grafico2 + facet_grid(.~Measure)
+
+iris.grafico1 + geom_jitter()
+
+#Se nota la dispersión de los valores mucho más claramente
+ggsave('figs/Ejercicio3.pdf') # se almacena el último gráfico generado
 ```
 
 ## Gráficos de línea con **ggplot2**
